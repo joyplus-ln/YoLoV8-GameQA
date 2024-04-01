@@ -1,2 +1,4 @@
 ﻿.idea
 runs/detect
+ultralytics/*/__pycache__
+**/__pycache__
