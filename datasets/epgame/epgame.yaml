@@ -14,9 +14,11 @@ val: val # val images (relative to 'path') 458 images
 #test: train # test images (optional) 937 images
 
 names:
-  0: closebtn
-  1: food
-  2: tie
+  0: toclick
+  1: mapbtn
+  2: currentlevel
+  3: oldlevel
+
 
 
 

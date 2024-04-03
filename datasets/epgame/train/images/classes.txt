@@ -1,3 +1,0 @@
-closebtn
-food
-tie

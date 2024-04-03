@@ -102,11 +102,13 @@ def Get_ScreenShot():
     if devices:
         device = devices[0]  # 选择第一个连接的设备
         print(f"Connected device: {device}")
-        return capture_android(device)
+        return device,capture_android(device)
     else:
         print("No device connected.")
         return None
 
+def Click_Screen(device,x,y):
+    device.shell(f'input tap {x} {y}')
 # # 模拟点击屏幕坐标 (x, y)
 # x = 500
 # y = 1000

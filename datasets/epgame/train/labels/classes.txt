@@ -1,0 +1,4 @@
+toclick
+mapbtn
+currentlevel
+oldlevel
