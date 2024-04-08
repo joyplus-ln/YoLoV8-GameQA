@@ -6,6 +6,7 @@ import ADBControl
 from AndroidDevice import AndroidDevice
 from ultralytics import YOLO
 
+#每隔一段时间给当前连接的所有设备截图一张
 def screenshot():
     for device in devicelist:
         device.TakeShotAutoSave()
