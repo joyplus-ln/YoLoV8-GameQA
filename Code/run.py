@@ -24,7 +24,7 @@ if __name__ == "__main__":
     # path = model.export(format="onnx")  # export the model to ONNX format
 
     #通过截图安卓屏幕来预测
-    model = YOLO("runs/detect/train7/weights/best.pt")
+    model = YOLO("../runs/detect/train7/weights/best.pt")
     device,image = ADBControl.Get_ScreenShot()
     results = model.predict(image,save=True,vid_stride=100,conf=0.6,max_det=100)
     for result in results:
@@ -34,7 +34,7 @@ if __name__ == "__main__":
             centx = (info["box"].get("x1") + info["box"].get("x2")) / 2
             centy = (info["box"].get("y1") + info["box"].get("y2")) / 2
             print("==>",info.get("name"),centx,centy)
-            ADBControl.Click_Screen(device,centx,centy)
+            ADBControl.Click_Screen(device, centx, centy)
         # result.show()
         # for box in result.boxes:
         #     print(box.cls)

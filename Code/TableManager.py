@@ -9,7 +9,7 @@ class TableManager:
 
     def loadTables(self,tableName:str):
         cwd = os.getcwd()
-        return json.load(open(f'{cwd}/json/' + tableName + ".json", 'r', encoding="utf-8"))
+        return json.load(open(f'{cwd}/../json/' + tableName + ".json", 'r', encoding="utf-8"))
 
 
 tableManager = TableManager()
