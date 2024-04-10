@@ -1,0 +1,18 @@
+[
+  {
+    "id": 10001,
+    "name": "测试检测",
+    "beforeDelay": 0.2,
+    "afterDelay": 0.2,
+    "predictTimes": 2,
+    "predictTimesDuration": 0.3,
+    "classList": [
+      11001,
+      11002
+    ],
+    "conf": 0.8,
+    "click": true,
+    "click_offset_x": 0,
+    "click_offset_y": 0
+  }
+]

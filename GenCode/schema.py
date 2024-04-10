@@ -25,17 +25,39 @@ class DefineFromExcel2 :
         self.desc = _json_['desc']
         self.count = _json_['count']
 
-class AttributeTable :
+class ActionConfig :
     def __init__(self, _json_):
         self.id = _json_['id']
         self.name = _json_['name']
-        self.Enable = _json_['Enable']
-        self.Des = _json_['Des']
-        self.Show = _json_['Show']
-        self.DefaultValue = _json_['DefaultValue']
-        self.ISFloat = _json_['ISFloat']
-        self.End = _json_['End']
-        self.CanShow = _json_['CanShow']
+        self.beforeDelay = _json_['beforeDelay']
+        self.afterDelay = _json_['afterDelay']
+        self.predictTimes = _json_['predictTimes']
+        self.predictTimesDuration = _json_['predictTimesDuration']
+        self.classList = []
+        for _ele in _json_['classList']: _e = _ele; self.classList.append(_e)
+        self.conf = _json_['conf']
+        self.click = _json_['click']
+        self.click_offset_x = _json_['click_offset_x']
+        self.click_offset_y = _json_['click_offset_y']
+
+class ClassConfig :
+    def __init__(self, _json_):
+        self.id = _json_['id']
+        self.name = _json_['name']
+        self.classid = _json_['classid']
+
+class MissionConfig :
+    def __init__(self, _json_):
+        self.id = _json_['id']
+        self.name = _json_['name']
+        self.classid = _json_['classid']
+        self.mission = {}
+        for _ek, _ev in _json_['mission']: _k = _ek; _v = MissionItem(_ev); self.mission[_k] =_v
+
+class MissionItem :
+    def __init__(self, _json_):
+        self.Order = _json_['Order']
+        self.ActionId = _json_['ActionId']
 
 
 class test_TbDefineFromExcel2:
@@ -54,14 +76,46 @@ class test_TbDefineFromExcel2:
 
     def get(self, key) : return self._dataMap.get(key)
 
-class cfg_TbAttribute:
+class cfg_TbActions:
 
     def __init__(self, _json_ ):
         self._dataMap = {}
         self._dataList = []
         
         for _json2_ in _json_:
-            _v = AttributeTable(_json2_)
+            _v = ActionConfig(_json2_)
+            self._dataList.append(_v)
+            self._dataMap[_v.id] = _v
+
+    def getDataMap(self) : return self._dataMap
+    def getDataList(self) : return self._dataList
+
+    def get(self, key) : return self._dataMap.get(key)
+
+class cfg_TbClasses:
+
+    def __init__(self, _json_ ):
+        self._dataMap = {}
+        self._dataList = []
+        
+        for _json2_ in _json_:
+            _v = ClassConfig(_json2_)
+            self._dataList.append(_v)
+            self._dataMap[_v.id] = _v
+
+    def getDataMap(self) : return self._dataMap
+    def getDataList(self) : return self._dataList
+
+    def get(self, key) : return self._dataMap.get(key)
+
+class cfg_MissionTable:
+
+    def __init__(self, _json_ ):
+        self._dataMap = {}
+        self._dataList = []
+        
+        for _json2_ in _json_:
+            _v = MissionConfig(_json2_)
             self._dataList.append(_v)
             self._dataMap[_v.id] = _v
 
@@ -75,5 +129,7 @@ class cfg_TbAttribute:
 class cfg_Tables:
     def __init__(self, loader):
         self.TbDefineFromExcel2 = test_TbDefineFromExcel2(loader('test_tbdefinefromexcel2')); 
-        self.TbAttribute = cfg_TbAttribute(loader('cfg_tbattribute')); 
+        self.TbActions = cfg_TbActions(loader('cfg_tbactions')); 
+        self.TbClasses = cfg_TbClasses(loader('cfg_tbclasses')); 
+        self.MissionTable = cfg_MissionTable(loader('cfg_missiontable')); 
 
