@@ -2,8 +2,10 @@ import asyncio
 
 from adbutils import AdbDevice
 
+from Code import Log
 from Code.GameAction import GameAction
-from Code.Init import tableManager
+from Code.Log import log
+from Code.TableManager import tableManager
 from GenCode.schema import MissionConfig
 
 
@@ -23,9 +25,10 @@ class MissionManager:
 
     #循环检测mission
     async def Run(self):
+        log.Info(f'GameAction Start {self.missionConfig.mission.get(self.actionIndex)}')
         if self.action is None:
-            self.action = self.createAction(self.actionIndex)
-            await self.action.Run()
+            self.action = self.createAction(self.missionConfig.mission.get(self.actionIndex).ActionId)
+            asyncio.run(self.action.Run())
         while  self.missionFinish is False:
             self.check()
             await self.checkFind()
@@ -36,7 +39,7 @@ class MissionManager:
     def check(self):
         if self.action.Check() :
             self.actionIndex += 1
-            if self.missionConfig.mission.get(self.actionIndex) is None :
+            if self.missionConfig.mission.get(self.missionConfig.mission.get(self.actionIndex).ActionId) is None :
                 self.actionIndex = 1
             self.action = None
 

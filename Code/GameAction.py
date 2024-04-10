@@ -2,7 +2,9 @@ import asyncio
 
 from adbutils import AdbDevice
 
-from Code.Init import tableManager, yoloModel
+from Code.Log import log
+from Code.TableManager import tableManager
+from Code.YoloFinder import yoloModel
 
 
 class GameAction():
@@ -16,19 +18,19 @@ class GameAction():
         return self.finish
 
     async def Run(self):
-
+        log.Info(f'GameAction Start {self.actionId}')
         from GenCode.schema import ActionConfig
         def _predict(actionConfig: ActionConfig):
             from Code.ADBControl import capture_android
             results = yoloModel.predict(capture_android(self.device),actionConfig.classList,actionConfig.conf)
-            if results.count() > 0:
+            if len(results) > 0:
                 for result in results:
                     infos = result.summary()
                     for info in infos:
-                        print(info)
                         centx = (info["box"].get("x1") + info["box"].get("x2")) / 2
                         centy = (info["box"].get("y1") + info["box"].get("y2")) / 2
                         from Code.ADBControl import Click_Screen
+                        log.Info(f'GameAction {self.actionId} 完成')
                         Click_Screen(self.device, centx + actionConfig.click_offset_x, centy + actionConfig.click_offset_y)
                 return True
             return False
@@ -44,4 +46,5 @@ class GameAction():
                 self.finish = True
                 break
             await asyncio.sleep(actionConfig.predictTimesDuration)
+        log.Info(f'GameAction {self.actionId} not Find')
         self.finish = True

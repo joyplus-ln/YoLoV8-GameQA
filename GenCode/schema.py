@@ -50,7 +50,7 @@ class MissionConfig :
     def __init__(self, _json_):
         self.id = _json_['id']
         self.name = _json_['name']
-        self.classid = _json_['classid']
+        self.FinishAction = _json_['FinishAction']
         self.mission = {}
         for _ek, _ev in _json_['mission']: _k = _ek; _v = MissionItem(_ev); self.mission[_k] =_v
 

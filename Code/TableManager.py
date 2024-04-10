@@ -11,6 +11,6 @@ class TableManager:
         cwd = os.getcwd()
         return json.load(open(f'{cwd}/../json/' + tableName + ".json", 'r', encoding="utf-8"))
 
-
-tableManager = TableManager()
-print(tableManager.tables.TbAttribute.getDataList())
+tableManager = None
+if tableManager is None:
+    tableManager = TableManager()

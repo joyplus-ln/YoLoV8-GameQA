@@ -2,27 +2,27 @@
   {
     "id": 13001,
     "name": "任务类型,一直循环missionitem直到发现对应的classicId",
-    "classid": 1,
+    "FinishAction": 10001,
     "mission": [
       [
         1,
         {
           "Order": 2,
-          "ActionId": 3
+          "ActionId": 10001
         }
       ],
       [
         2,
         {
           "Order": 2,
-          "ActionId": 3
+          "ActionId": 10001
         }
       ],
       [
         3,
         {
           "Order": 2,
-          "ActionId": 3
+          "ActionId": 10001
         }
       ]
     ]

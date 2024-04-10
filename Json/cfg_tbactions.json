@@ -7,8 +7,8 @@
     "predictTimes": 2,
     "predictTimesDuration": 0.3,
     "classList": [
-      11001,
-      11002
+      1,
+      2
     ],
     "conf": 0.8,
     "click": true,
